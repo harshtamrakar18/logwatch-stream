@@ -58,6 +58,15 @@ class ApiService {
     return this.request('/metrics/errors-per-minute');
   }
 
+  // Traces
+  async getTraces() {
+    return this.request('/traces');
+  }
+
+  async getTrace(traceId: string) {
+    return this.request(`/traces/${traceId}`);
+  }
+
   // Generate mock data for development
   generateMockLogs(count: number = 50) {
     const levels = ['INFO', 'WARN', 'ERROR'] as const;
