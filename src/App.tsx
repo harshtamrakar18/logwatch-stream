@@ -10,6 +10,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import { Metrics } from "./pages/Metrics";
+import { LogDetails } from "./pages/LogDetails";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,11 @@ const App = () => (
               <Route path="/metrics" element={
                 <PrivateRoute>
                   <Metrics />
+                </PrivateRoute>
+              } />
+              <Route path="/logs/:id" element={
+                <PrivateRoute>
+                  <LogDetails />
                 </PrivateRoute>
               } />
               <Route path="*" element={<NotFound />} />

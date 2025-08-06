@@ -1,9 +1,9 @@
-import React, { memo, useState, useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Log } from '@/types';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 interface LogRowProps {
   log: Log;
@@ -11,11 +11,11 @@ interface LogRowProps {
 }
 
 const LogRowComponent: React.FC<LogRowProps> = ({ log, style }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const navigate = useNavigate();
 
-  const toggleExpanded = useCallback(() => {
-    setIsExpanded(!isExpanded);
-  }, [isExpanded]);
+  const handleClick = useCallback(() => {
+    navigate(`/logs/${log.id}`);
+  }, [navigate, log.id]);
 
   const getLevelVariant = (level: string) => {
     switch (level) {
@@ -47,22 +47,12 @@ const LogRowComponent: React.FC<LogRowProps> = ({ log, style }) => {
 
   return (
     <div style={style} className="px-4 py-1">
-      <Card className="bg-dashboard-log-row hover:bg-dashboard-log-hover transition-colors border-border/50">
+      <Card className="bg-dashboard-log-row hover:bg-dashboard-log-hover transition-colors border-border/50 cursor-pointer">
         <div
-          className="flex items-center space-x-3 p-3 cursor-pointer"
-          onClick={toggleExpanded}
+          className="flex items-center space-x-3 p-3"
+          onClick={handleClick}
         >
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-6 w-6 p-0 text-muted-foreground"
-          >
-            {isExpanded ? (
-              <ChevronDown className="h-3 w-3" />
-            ) : (
-              <ChevronRight className="h-3 w-3" />
-            )}
-          </Button>
+          <ExternalLink className="h-3 w-3 text-muted-foreground flex-shrink-0" />
 
           <div className="text-xs text-muted-foreground font-mono min-w-0 flex-shrink-0">
             {formatTimestamp(log.timestamp)}
@@ -79,17 +69,6 @@ const LogRowComponent: React.FC<LogRowProps> = ({ log, style }) => {
             {log.message}
           </div>
         </div>
-
-        {isExpanded && (
-          <div className="px-3 pb-3">
-            <div className="pt-2 border-t border-border/50">
-              <div className="text-xs text-muted-foreground mb-2">Metadata:</div>
-              <pre className="text-xs bg-muted/50 p-2 rounded border overflow-x-auto">
-                {JSON.stringify(log.metadata, null, 2)}
-              </pre>
-            </div>
-          </div>
-        )}
       </Card>
     </div>
   );
