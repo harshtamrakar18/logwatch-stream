@@ -52,6 +52,30 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Log monitoring specific colors
+				info: {
+					DEFAULT: 'hsl(var(--info))',
+					foreground: 'hsl(var(--info-foreground))'
+				},
+				warn: {
+					DEFAULT: 'hsl(var(--warn))',
+					foreground: 'hsl(var(--warn-foreground))'
+				},
+				error: {
+					DEFAULT: 'hsl(var(--error))',
+					foreground: 'hsl(var(--error-foreground))'
+				},
+				success: {
+					DEFAULT: 'hsl(var(--success))',
+					foreground: 'hsl(var(--success-foreground))'
+				},
+				dashboard: {
+					bg: 'hsl(var(--dashboard-bg))',
+					header: 'hsl(var(--header-bg))',
+					filter: 'hsl(var(--filter-bar-bg))',
+					'log-row': 'hsl(var(--log-row-bg))',
+					'log-hover': 'hsl(var(--log-row-hover))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
